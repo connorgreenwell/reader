@@ -1,0 +1,52 @@
+<html>
+<head>
+	<title>Connors RSS Reader</title>
+	<style>
+		html {
+       			width: 90%;
+        		margin-left: auto;
+        		margin-right:auto;
+		}
+		.next {
+			text-align: right;
+		}
+	</style>
+</head>
+<body>
+<div class="control">
+{{ if .HasPrev }}
+	<a class="prev" href="{{ .Prev }}">prev</a>
+{{ end }}
+{{ if .HasNext }}
+	<a class="next" href="{{ .Next }}">next</a>
+{{ end }}
+</div>
+<div class="articles">
+	{{ range .Items }}
+	<div class="article">
+		<h2 class="title"><a href="{{ .Link }}">{{ .Title }}</a></h2>
+		<p class="date"><small>{{ .Date }}</small></p>
+		<div class="content">{{ .Content }}</div>
+	</div>
+	{{ end }}
+	{{ if .End }}
+	<div class="article">
+		<p>There's no more...</p>
+	</div>
+	{{ end }}
+</div>
+<div class="control">
+{{ if .HasPrev }}
+	<a class="prev" href="{{ .Prev }}">prev</a>
+{{ end }}
+{{ if .HasNext }}
+	<a class="next" href="{{ .Next }}">next</a>
+{{ end }}
+</div>
+<div class="feeds">
+{{ range .Feeds}}
+	<p>{{ . }}<a href="/remove/?blog={{.}}">x</a></p>
+{{ end }}
+</div>
+</body>
+</html>
